@@ -1,24 +1,31 @@
-# README
+# Parse Content
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The application provides 2 endpoints for parsing HTML page from url parameter, and returns stored parsed contents.
 
-Things you may want to cover:
+## Getting started
+Clone the code, run `bundle`, `rake db:create db:migrate` and you are done.
 
-* Ruby version
+## API details
 
-* System dependencies
+### Parsing API: `/api/sites`
+  Accepts an URL as parameter, parses the page at that URL, and stores all contents within H1, H2, H3 and hrefs found.
 
-* Configuration
+  Required params: `url`
+  
+  Example: 
+```curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"url": "https://github.com/"}' 'http://localhost:3000/api/sites'```
 
-* Database creation
+### Listing contents API: `/api/site_contents`
+  Returns list of stored contents, paginated, with per_page=30.
 
-* Database initialization
+  Optional params: `page`
 
-* How to run the test suite
+  Example:
+  ```curl -X GET --header 'Content-Type: application/json' --header 'Accept: application/json' 'http://localhost:3000/api/site_contents'```
+  
+## TODOS:
+- Moving processing url to background job.
 
-* Services (job queues, cache servers, search engines, etc.)
+  
 
-* Deployment instructions
 
-* ...
